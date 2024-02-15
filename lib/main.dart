@@ -24,7 +24,55 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("Boilerplate")),
+      body: Center(
+        child: MaterialButton(
+          onPressed: () {
+            _openAnimatedDialog(context);
+          },
+          height: 50,
+          minWidth: 200,
+          color: const Color(0xff1D1E22),
+          child: const Text(
+            'ANIMATED DIALOG',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _openAnimatedDialog(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: '',
+      transitionDuration: const Duration(milliseconds: 250),
+      pageBuilder: (context, animation1, animation2) {
+        return Container();
+      },
+      transitionBuilder: (context, a1, a2, widget) {
+        return ScaleTransition(
+          scale: Tween<double>(begin: 0.5, end: 1.0).animate(a1),
+          child: FadeTransition(
+            opacity: Tween<double>(begin: 0.4, end: 1.0).animate(a1),
+            child: AlertDialog(
+                title: const Center(
+                    child: Text(
+                  '😐',
+                  style: TextStyle(fontSize: 40),
+                )),
+                content: const Center(
+                    heightFactor: 0.5,
+                    child: Text(
+                      'Close me',
+                      style: TextStyle(fontSize: 25),
+                    )),
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none)),
+          ),
+        );
+      },
     );
   }
 }
