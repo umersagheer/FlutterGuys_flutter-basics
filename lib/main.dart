@@ -18,13 +18,55 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  TimeOfDay _timeOfDay = TimeOfDay.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("Boilerplate")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "${_timeOfDay.hour.toString().padLeft(2, '0')}:${_timeOfDay.minute.toString().padLeft(2, '0')}",
+              style: const TextStyle(fontSize: 20),
+            ),
+            MaterialButton(
+                height: 50,
+                minWidth: 150,
+                color: Colors.blue,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                child: const Text(
+                  'Open Time Picker',
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                onPressed: () {
+                  _selectTime();
+                })
+          ],
+        ),
+      ),
     );
+  }
+
+  Future<void> _selectTime() async {
+    TimeOfDay? picked =
+        await showTimePicker(context: context, initialTime: _timeOfDay);
+    if (picked != null) {
+      setState(() {
+        _timeOfDay = picked;
+      });
+    }
   }
 }
