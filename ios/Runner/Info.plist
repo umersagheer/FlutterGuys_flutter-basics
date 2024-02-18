@@ -4,6 +4,12 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<Key>NSCameraUsageDescription</key>
+	<string>Used to demonstrate image picker plugin</string>
+	<Key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to demonstrate image picker plugin</string>
+	<Key>NSMicrophoneUsageDescription</key>
+	<string>Used to capture audio for image picker plugin</string>
 	<key>CFBundleDisplayName</key>
 	<string>Flutter Basics</string>
 	<key>CFBundleExecutable</key>
